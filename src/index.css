@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    background-color: #F7F7F5;
+    color: #0A0A0A;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+::selection {
+  background-color: #0A0A0A;
+  color: #F7F7F5;
+}
+
+/* Custom Cursor Rules for Desktop */
+@media (min-width: 1024px) {
+  body {
+    cursor: default;
+  }
+}

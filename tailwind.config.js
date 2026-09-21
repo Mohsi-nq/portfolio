@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -8,12 +8,13 @@ export default {
         brandPrimary: '#0A0A0A',
         brandSecondary: '#6B6B6B',
         brandBorder: '#E5E5E5',
-        brandAccent: '#4F46E5',
+        brandAccent: '#10B981',
       },
       fontFamily: {
-        sans: ['Inter', 'Plus Jakarta Sans', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
     },
   },
   plugins: [],
-}
+};

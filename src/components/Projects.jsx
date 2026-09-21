@@ -1,109 +1,83 @@
 import React from 'react';
+import { ArrowUpRight, Github } from 'lucide-react';
+import { projects } from '../data/portfolioData';
 
-const projects = [
-  {
-    id: "01",
-    title: "ON-DEVICE RAG APPLICATION",
-    subtitle: "Gemma × Orama Vector Database",
-    description:
-      "An on-device Retrieval-Augmented Generation application designed to provide context-aware responses while reducing dependency on cloud-based AI services.",
-    pipeline:
-      "DOCUMENTS ↓ PREPROCESSING ↓ CHUNKING ↓ EMBEDDINGS ↓ ORAMA ↓ SEMANTIC SEARCH ↓ GEMMA ↓ RESPONSE",
-    tags: [
-      "Python",
-      "Gemma",
-      "RAG",
-      "Orama",
-      "Vector Database",
-      "Embeddings",
-      "NLP"
-    ]
-  },
-  {
-    id: "02",
-    title: "AUTISM DETECTION FROM 3D BRAIN MRI",
-    subtitle: "Deep Learning Pipeline",
-    description:
-      "A deep learning application utilizing CNN architectures and SHAP interpretability to classify 3D MRI brain scans for early autism detection.",
-    pipeline:
-      "3D MRI SCANS ↓ SKULL STRIPPING ↓ NORMALIZATION ↓ CNN FEATURE EXTRACTION ↓ SHAP INTERPRETABILITY ↓ CLASSIFICATION",
-    tags: ["Python", "TensorFlow", "Nilearn", "ANTS", "DIPY", "SHAP", "CNN"]
-  },
-  {
-    id: "03",
-    title: "INTELLIGENT RESUME SCREENING SYSTEM",
-    subtitle: "Machine Learning & NLP",
-    description:
-      "Automates candidate selection by matching resumes with job descriptions using TF-IDF vectorization and cosine similarity scoring.",
-    pipeline:
-      "RESUME INPUT ↓ TOKENIZATION ↓ TF-IDF VECTORIZATION ↓ COSINE SIMILARITY ↓ RANKING",
-    tags: ["Python", "Scikit-learn", "Pandas", "NLP", "TF-IDF", "Streamlit"]
-  }
-];
-
-export default function Work() {
+export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-6 lg:px-12 bg-brandBg border-t border-brandBorder">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-brandSecondary block mb-2">
-              SELECTED WORK
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-brandPrimary uppercase">
-              Featured Case Studies
-            </h2>
-          </div>
-          <p className="text-sm text-brandSecondary max-w-sm leading-relaxed font-light">
-            A few things I've built while exploring AI, machine learning, and software engineering.
-          </p>
+    <section id="projects" className="py-20 px-6 lg:px-12 bg-brandBg border-t border-brandBorder">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+        <div>
+          <span className="text-xs font-mono uppercase tracking-widest text-brandSecondary">Featured Artifacts</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-brandPrimary uppercase mt-1">
+            SELECTED PROJECTS
+          </h2>
         </div>
+        <p className="text-xs font-mono text-brandSecondary max-w-xs">
+          Practical systems combining AI models, vector search, software engineering, and clean architecture.
+        </p>
+      </div>
 
-        {/* Project Cards List */}
-        <div className="space-y-12">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="p-8 sm:p-12 border border-brandBorder/80 rounded-3xl bg-white/40 backdrop-blur-sm transition-all hover:border-brandPrimary/30"
-            >
-              <span className="text-xs font-mono text-brandSecondary block mb-4">
-                {project.id} // PROJECT
-              </span>
+      <div className="space-y-12">
+        {projects.map((project) => (
+          <div 
+            key={project.id} 
+            className="p-8 border border-brandBorder rounded-xl bg-white/60 backdrop-blur-sm hover:border-brandPrimary transition-all duration-300"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-6">
+                <span className="text-xs font-mono font-bold text-brandSecondary">{project.id}</span>
+                <h3 className="text-2xl font-bold text-brandPrimary uppercase tracking-tight mt-1">
+                  {project.title}
+                </h3>
+                <p className="text-xs font-mono text-emerald-600 uppercase mt-1">{project.subtitle}</p>
+                <p className="text-sm text-brandSecondary mt-4 leading-relaxed">{project.description}</p>
 
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-brandPrimary tracking-tight uppercase mb-2">
-                {project.title}
-              </h3>
+                {/* Tech Pills */}
+                <div className="flex flex-wrap gap-2 mt-6">
+                  {project.tech.map((tech) => (
+                    <span key={tech} className="px-2.5 py-1 bg-neutral-100 rounded text-[11px] font-mono text-brandSecondary border border-brandBorder">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
-              <p className="text-xs font-mono font-semibold text-brandPrimary/70 mb-6 uppercase tracking-wider">
-                {project.subtitle}
-              </p>
+                {/* Action Buttons */}
+                <div className="flex items-center gap-4 mt-8">
+                  <a href={project.projectUrl} className="px-4 py-2 bg-brandPrimary text-white rounded-full text-xs font-mono font-bold uppercase flex items-center gap-1.5">
+                    VIEW PROJECT <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
 
-              <p className="text-sm sm:text-base text-brandSecondary leading-relaxed max-w-4xl font-light mb-8">
-                {project.description}
-              </p>
-
-              {/* Workflow Pipeline Container */}
-              <div className="p-4 border border-brandBorder/60 rounded-xl bg-white/80 font-mono text-[11px] sm:text-xs text-brandPrimary tracking-tight mb-8 overflow-x-auto whitespace-nowrap">
-                {project.pipeline}
+                  {project.repoUrl ? (
+                    <a href={project.repoUrl} target="_blank" rel="noreferrer" className="px-4 py-2 border border-brandBorder rounded-full text-xs font-mono font-semibold text-brandPrimary hover:bg-neutral-100 flex items-center gap-1.5">
+                      <Github className="w-3.5 h-3.5" /> VIEW REPO <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  ) : (
+                    <span className="px-4 py-2 border border-brandBorder rounded-full text-xs font-mono text-neutral-400 flex items-center gap-1.5 cursor-not-allowed">
+                      <Github className="w-3.5 h-3.5" /> [GitHub Repository]
+                    </span>
+                  )}
+                </div>
               </div>
 
-              {/* Tech Stack Pills */}
-              <div className="flex flex-wrap items-center gap-2">
-                {project.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="px-4 py-1.5 border border-brandBorder rounded-full text-xs font-mono text-brandPrimary bg-white/50"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              {/* Architecture Pipeline */}
+              <div className="lg:col-span-6 bg-neutral-900 text-neutral-100 p-6 rounded-lg font-mono text-xs overflow-x-auto border border-neutral-800">
+                <span className="text-[10px] text-neutral-500 uppercase tracking-widest block mb-4">// System Architecture Pipeline</span>
+                <div className="flex flex-wrap items-center gap-2">
+                  {project.architecture.map((step, idx) => (
+                    <React.Fragment key={step}>
+                      <span className="px-2.5 py-1 bg-neutral-800 border border-neutral-700 rounded text-neutral-200">
+                        {step}
+                      </span>
+                      {idx < project.architecture.length - 1 && (
+                        <span className="text-neutral-500">→</span>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-
+          </div>
+        ))}
       </div>
     </section>
   );
